@@ -1,6 +1,6 @@
 # Oslo IA 🤖
 
-> REST API powered by Google Gemini AI, featuring JWT authentication, conversation history, and full AWS infrastructure.
+> API REST de Inteligência Artificial integrada ao Google Gemini, com autenticação JWT, histórico de conversas e infraestrutura completa na AWS.
 
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-green?style=flat-square&logo=springboot)
@@ -12,19 +12,19 @@
 
 ---
 
-## 📋 About
+## 📋 Sobre o Projeto
 
-**Oslo IA** is a REST API that allows users to chat with Google Gemini AI in a secure and authenticated way. Each user has their own conversation history stored in the database.
+O **Oslo IA** é uma API REST que permite aos usuários conversarem com a Inteligência Artificial do Google Gemini de forma segura e autenticada. Cada usuário possui seu próprio histórico de conversas armazenado em banco de dados.
 
-The project was built with a focus on development best practices, security, and cloud infrastructure — covering everything from development to production deployment.
+O projeto foi desenvolvido com foco em boas práticas de desenvolvimento, segurança e infraestrutura em nuvem, sendo um projeto completo de portfólio que cobre desde o desenvolvimento até o deploy em produção.
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Arquitetura
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     Client / Swagger                     │
+│                     Cliente / Swagger                    │
 └─────────────────────────┬───────────────────────────────┘
                           │ HTTP
 ┌─────────────────────────▼───────────────────────────────┐
@@ -38,10 +38,10 @@ The project was built with a focus on development best practices, security, and 
 │   ┌──────────────────────────────────────────────────┐  │
 │   │              Oslo IA (Spring Boot)               │  │
 │   │                                                  │  │
-│   │  /auth/register  →  User registration            │  │
-│   │  /auth/login     →  JWT authentication           │  │
-│   │  /ai/chat        →  Chat with Gemini             │  │
-│   │  /ai/history     →  Conversation history         │  │
+│   │  /auth/register  →  Cadastro de usuário          │  │
+│   │  /auth/login     →  Autenticação JWT             │  │
+│   │  /ai/chat        →  Conversa com Gemini          │  │
+│   │  /ai/history     →  Histórico de conversas       │  │
 │   └──────────────┬───────────────────────────────────┘  │
 └──────────────────┼──────────────────────────────────────┘
                    │
@@ -55,46 +55,46 @@ The project was built with a focus on development best practices, security, and 
 
 ---
 
-## 🚀 Tech Stack
+## 🚀 Tecnologias
 
 ### Backend
-| Technology | Version | Purpose |
+| Tecnologia | Versão | Uso |
 |---|---|---|
-| Java | 21 | Main language |
-| Spring Boot | 3.2.5 | Web framework |
-| Spring Security | 6.x | Security and authentication |
-| JWT (JJWT) | 0.11.5 | Authentication tokens |
-| Spring Data JPA | 3.x | Data persistence |
-| Flyway | 9.x | Database migrations |
-| SpringDoc OpenAPI | 2.3.0 | Swagger documentation |
-| WebFlux | 6.x | Reactive HTTP client |
+| Java | 21 | Linguagem principal |
+| Spring Boot | 3.2.5 | Framework web |
+| Spring Security | 6.x | Segurança e autenticação |
+| JWT (JJWT) | 0.11.5 | Tokens de autenticação |
+| Spring Data JPA | 3.x | Persistência de dados |
+| Flyway | 9.x | Migrations de banco |
+| SpringDoc OpenAPI | 2.3.0 | Documentação Swagger |
+| WebFlux | 6.x | Cliente HTTP reativo |
 
-### Database
-| Technology | Purpose |
+### Banco de Dados
+| Tecnologia | Uso |
 |---|---|
-| PostgreSQL 15 | Main database |
-| Docker Compose | Local development environment |
-| AWS RDS | Production database |
+| PostgreSQL 15 | Banco de dados principal |
+| Docker Compose | Ambiente de desenvolvimento local |
+| AWS RDS | Banco de dados em produção |
 
-### Infrastructure & DevOps
-| Technology | Purpose |
+### Infraestrutura & DevOps
+| Tecnologia | Uso |
 |---|---|
-| Docker | Application containerization |
-| AWS ECR | Docker image registry |
-| AWS EKS | Container orchestration (Kubernetes) |
-| AWS RDS | Managed database |
-| Terraform | Infrastructure as Code (IaC) |
-| GitHub Actions | Automated CI/CD |
+| Docker | Containerização da aplicação |
+| AWS ECR | Repositório de imagens Docker |
+| AWS EKS | Orquestração de containers (Kubernetes) |
+| AWS RDS | Banco de dados gerenciado |
+| Terraform | Infraestrutura como código (IaC) |
+| GitHub Actions | CI/CD automatizado |
 | Kubernetes | Deployment, Service, Secrets |
 
-### AI
-| Technology | Purpose |
+### IA
+| Tecnologia | Uso |
 |---|---|
-| Google Gemini 2.5 Flash | Language model |
+| Google Gemini 2.5 Flash | Modelo de linguagem |
 
 ---
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
 ```
 oslo-ia/
@@ -146,39 +146,41 @@ oslo-ia/
 
 ## 🔌 Endpoints
 
-### Authentication
+### Autenticação
 
-| Method | Endpoint | Description | Auth |
+| Método | Endpoint | Descrição | Auth |
 |---|---|---|---|
-| POST | `/auth/register` | User registration | ❌ |
-| POST | `/auth/login` | Login and JWT token return | ❌ |
+| POST | `/auth/register` | Cadastro de usuário | ❌ |
+| POST | `/auth/login` | Login e retorno do JWT | ❌ |
 
-### AI
 
-| Method | Endpoint | Description | Auth |
+
+
+### IA
+
+| Método | Endpoint | Descrição | Auth |
 |---|---|---|---|
-| POST | `/ai/chat` | Send message to Gemini | ✅ JWT |
-| GET | `/ai/history` | User conversation history | ✅ JWT |
+| POST | `/ai/chat` | Envia mensagem para o Gemini | ✅ JWT |
+| GET | `/ai/history` | Histórico de conversas do usuário | ✅ JWT |
 
 ---
 
-## ⚠️ HTTP Response Codes
+## ⚠️ Códigos de Resposta HTTP
 
-| Code | Description |
+| Código | Descrição |
 |---|---|
-| 200 | Request successful |
-| 201 | Resource created successfully |
-| 400 | Invalid request data |
-| 401 | Invalid credentials or expired token |
-| 403 | Access forbidden |
-| 404 | Resource not found |
-| 409 | Conflict — email already registered |
-| 429 | Gemini API rate limit reached |
-| 503 | Gemini service unavailable |
-| 500 | Internal server error |
+| **200** | Requisição bem sucedida |
+| **201** | Recurso criado com sucesso |
+| **400** | Dados inválidos na requisição |
+| **401** | Credenciais inválidas ou token expirado |
+| **403** | Sem permissão de acesso |
+| **404** | Recurso não encontrado |
+| **409** | Conflito — email já cadastrado |
+| **429** | Limite de requisições do Gemini atingido |
+| **503** | Serviço do Gemini indisponível |
+| **500** | Erro interno no servidor |
 
-### Error response example
-
+### Exemplo de resposta de erro
 ```json
 {
   "status": 409,
@@ -188,17 +190,15 @@ oslo-ia/
 }
 ```
 
----
+## 📖 Como Usar
 
-## 📖 How to Use
-
-### 1. Register
+### 1. Cadastro
 ```bash
 curl -X POST http://muriloferrieradev.ddns.net/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Your Name",
-    "email": "your@email.com",
+    "name": "Seu Nome",
+    "email": "seu@email.com",
     "password": "123456"
   }'
 ```
@@ -208,72 +208,72 @@ curl -X POST http://muriloferrieradev.ddns.net/auth/register \
 curl -X POST http://muriloferrieradev.ddns.net/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "your@email.com",
+    "email": "seu@email.com",
     "password": "123456"
   }'
 ```
 
-### 3. Chat with AI
+### 3. Chat com IA
 ```bash
 curl -X POST http://muriloferrieradev.ddns.net/ai/chat \
-  -H "Authorization: Bearer {your-token}" \
+  -H "Authorization: Bearer {seu-token}" \
   -H "Content-Type: application/json" \
-  -d '{"message": "Hello! Who are you?"}'
+  -d '{"message": "Olá! Quem é você?"}'
 ```
 
-### 4. Conversation History
+### 4. Histórico
 ```bash
 curl -X GET http://muriloferrieradev.ddns.net/ai/history \
-  -H "Authorization: Bearer {your-token}"
+  -H "Authorization: Bearer {seu-token}"
 ```
 
 ---
 
-## 📚 Documentation
+## 📚 Documentação
 
-Access the Swagger UI to test all endpoints interactively:
+Acesse o Swagger para testar todos os endpoints interativamente:
 
 ```
 http://muriloferrieradev.ddns.net/swagger-ui.html
-```
 
-> ⚠️ **External access available until 04/10/2026.**
-> After this date the AWS environment will be shut down to avoid costs.
-> To test locally, follow the instructions in the **Running Locally** section.
+> ⚠️ **Acesso externo disponível até 10/04/2026.** 
+Após essa data o ambiente AWS será desligado para evitar custos. 
+Para testar localmente siga as instruções da seção **Rodando Localmente**.
+```
 
 ---
 
-## 🛠️ Running Locally
+## 🛠️ Rodando Localmente
 
-### Prerequisites
+### Pré-requisitos
 - Java 21
 - Maven
 - Docker Desktop
 
-### Steps
+### Passos
 
 ```bash
-# 1. Clone the repository
+# 1. Clone o repositório
 git clone https://github.com/MuriloFerreiraDev/OsloIA.git
 cd OsloIA
 
-# 2. Start the database
+# 2. Suba o banco de dados
 docker-compose up -d
 
-# 3. Set the environment variable
-export GEMINI_API_KEY=your-api-key-here
+# 3. Configure a variável de ambiente
+export GEMINI_API_KEY=sua-chave-aqui
 
-# 4. Run the application
+# 4. Rode a aplicação
 ./mvnw spring-boot:run
 ```
 
-Access: `http://localhost:8080/swagger-ui.html`
+Acesse: `http://localhost:8080/swagger-ui.html`
 
 ---
 
-## ☁️ AWS Infrastructure
+## ☁️ Infraestrutura AWS
 
-Infrastructure is provisioned with **Terraform** in the `sa-east-1` (São Paulo) region:
+A infraestrutura é provisionada com **Terraform** na região `sa-east-1` (São Paulo):
 
 ```bash
 cd terraform
@@ -281,73 +281,72 @@ terraform init
 terraform apply
 ```
 
-### Resources created:
-- **ECR** — Docker image registry
-- **EKS** — Kubernetes cluster with t3.small Node Group
+### Recursos criados:
+- **ECR** — Repositório de imagens Docker
+- **EKS** — Cluster Kubernetes com Node Group t3.small
 - **RDS** — PostgreSQL 15 (db.t3.micro)
-- **Security Groups** — Configured for each service
-- **IAM Roles** — Permissions for EKS and Node Group
+- **Security Groups** — Configurados para cada serviço
+- **IAM Roles** — Permissões para EKS e Node Group
 
 ---
 
 ## 🔄 CI/CD
 
-The CI/CD pipeline runs automatically on every push to the `main` branch:
+O pipeline de CI/CD é executado automaticamente a cada push na branch `main`:
 
 ```
-Push to main branch
+Push na branch main
         ↓
-Docker image build
+Build da imagem Docker
         ↓
-Push to AWS ECR
+Push para o AWS ECR
         ↓
-Kubernetes Secrets update
+Atualização dos Kubernetes Secrets
         ↓
-Deploy to AWS EKS
+Deploy no AWS EKS
         ↓
 Rolling Update (zero downtime)
 ```
 
 ---
 
-## 🔐 Security
+## 🔐 Segurança
 
-- JWT authentication with 24-hour expiration
-- Passwords encrypted with BCrypt
-- Credentials stored in Kubernetes Secrets
-- Pipeline secrets stored in GitHub Secrets
-- Database accessible only within the VPC
+- Autenticação via **JWT** com expiração de 24 horas
+- Senhas criptografadas com **BCrypt**
+- Credenciais armazenadas em **Kubernetes Secrets**
+- Secrets do pipeline armazenados no **GitHub Secrets**
+- Banco de dados acessível apenas dentro da VPC
 
 ---
 
-## 🧪 Tests
+## 🧪 Testes
 
-The project includes unit tests implemented with **JUnit 5** and **Mockito**.
+O projeto possui testes unitários implementados com **JUnit 5** e **Mockito**.
 
-### Running tests
-
+### Executar os testes
 ```bash
 ./mvnw test
 ```
 
-### Test coverage
+### Cobertura de testes
 
-| Class | Tests | Scenarios covered |
+| Classe | Testes | Cenários cobertos |
 |---|---|---|
-| `AuthService` | 5 | Register success, duplicate email, login success, wrong password, user not found |
+| `AuthService` | 5 | Register com sucesso, email duplicado, login com sucesso, senha incorreta, usuário não encontrado |
 
-### Testing technologies
+### Tecnologias utilizadas nos testes
 
-| Technology | Purpose |
+| Tecnologia | Uso |
 |---|---|
-| **JUnit 5** | Testing framework |
-| **Mockito** | Dependency mocking |
-| **AssertJ** | Assertion library |
-| **H2** | In-memory database for integration tests |
+| **JUnit 5** | Framework de testes |
+| **Mockito** | Mock de dependências |
+| **AssertJ** | Verificações dos testes |
+| **H2** | Banco em memória para testes de integração |
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Autor
 
 **Murilo Ferreira**
 
@@ -355,6 +354,6 @@ The project includes unit tests implemented with **JUnit 5** and **Mockito**.
 
 ---
 
-## 📄 License
+## 📄 Licença
 
-This project is licensed under the MIT License.
+Este projeto está sob a licença MIT.
