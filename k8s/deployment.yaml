@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oslo-ia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oslo-ia
+  template:
+    metadata:
+      labels:
+        app: oslo-ia
+    spec:
+      containers:
+        - name: oslo-ia
+          image: 029953329959.dkr.ecr.sa-east-1.amazonaws.com/oslo-ia:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: oslo-ia-secrets
+                  key: GEMINI_API_KEY
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: oslo-ia-secrets
+                  key: DB_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: oslo-ia-secrets
+                  key: DB_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: oslo-ia-secrets
+                  key: DB_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
