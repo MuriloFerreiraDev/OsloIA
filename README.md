@@ -208,7 +208,9 @@ Acesse o Swagger para testar todos os endpoints interativamente:
 ```
 http://muriloferrieradev.ddns.net/swagger-ui.html
 
-> ⚠️ **Acesso externo disponível até 10/04/2026.** Após essa data o ambiente AWS será desligado para evitar custos. Para testar localmente siga as instruções da seção **Rodando Localmente**.
+> ⚠️ **Acesso externo disponível até 10/04/2026.** 
+Após essa data o ambiente AWS será desligado para evitar custos. 
+Para testar localmente siga as instruções da seção **Rodando Localmente**.
 ```
 
 ---
