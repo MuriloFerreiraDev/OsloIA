@@ -320,6 +320,32 @@ Rolling Update (zero downtime)
 
 ---
 
+## 🧪 Testes
+
+O projeto possui testes unitários implementados com **JUnit 5** e **Mockito**.
+
+### Executar os testes
+```bash
+./mvnw test
+```
+
+### Cobertura de testes
+
+| Classe | Testes | Cenários cobertos |
+|---|---|---|
+| `AuthService` | 5 | Register com sucesso, email duplicado, login com sucesso, senha incorreta, usuário não encontrado |
+
+### Tecnologias utilizadas nos testes
+
+| Tecnologia | Uso |
+|---|---|
+| **JUnit 5** | Framework de testes |
+| **Mockito** | Mock de dependências |
+| **AssertJ** | Verificações dos testes |
+| **H2** | Banco em memória para testes de integração |
+
+---
+
 ## 👨‍💻 Autor
 
 **Murilo Ferreira**
