@@ -153,6 +153,32 @@ oslo-ia/
 | POST | `/auth/register` | Cadastro de usuário | ❌ |
 | POST | `/auth/login` | Login e retorno do JWT | ❌ |
 
+
+## ⚠️ Códigos de Resposta HTTP
+
+| Código | Descrição |
+|---|---|
+| **200** | Requisição bem sucedida |
+| **201** | Recurso criado com sucesso |
+| **400** | Dados inválidos na requisição |
+| **401** | Credenciais inválidas ou token expirado |
+| **403** | Sem permissão de acesso |
+| **404** | Recurso não encontrado |
+| **409** | Conflito — email já cadastrado |
+| **429** | Limite de requisições do Gemini atingido |
+| **503** | Serviço do Gemini indisponível |
+| **500** | Erro interno no servidor |
+
+### Exemplo de resposta de erro
+```json
+{
+  "status": 409,
+  "error": "Conflict",
+  "message": "Email already exists",
+  "timestamp": "2026-04-04T10:30:00"
+}
+```
+
 ### IA
 
 | Método | Endpoint | Descrição | Auth |
