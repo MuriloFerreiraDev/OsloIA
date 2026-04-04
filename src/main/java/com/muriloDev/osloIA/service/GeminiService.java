@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,15 +34,12 @@ public class GeminiService {
             .build();
 
     public ChatResponse chat(ChatRequest request) {
-        // Pegar usuário logado
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Chamar o Gemini
         String aiResponse = callGemini(request.getMessage());
 
-        // Salvar no histórico
         ChatHistory history = ChatHistory.builder()
                 .user(user)
                 .userMessage(request.getMessage())
@@ -48,7 +47,6 @@ public class GeminiService {
                 .build();
 
         chatHistoryRepository.save(history);
-
         return new ChatResponse(request.getMessage(), aiResponse);
     }
 
@@ -69,18 +67,24 @@ public class GeminiService {
     }
 
     private String callGemini(String message) {
-        String url = "/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
+        Map<String, String> part = new HashMap<>();
+        part.put("text", message);
 
-        Map<String, Object> body = Map.of(
-                "contents", List.of(
-                        Map.of("parts", List.of(
-                                Map.of("text", message)
-                        ))
-                )
-        );
+        List<Map<String, String>> parts = new ArrayList<>();
+        parts.add(part);
+
+        Map<String, Object> content = new HashMap<>();
+        content.put("parts", parts);
+
+        List<Map<String, Object>> contents = new ArrayList<>();
+        contents.add(content);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("contents", contents);
 
         Map response = webClient.post()
-                .uri(url)
+                .uri("/v1beta/models/gemini-2.5-flash:generateContent")
+                .header("x-goog-api-key", apiKey)
                 .header("Content-Type", "application/json")
                 .bodyValue(body)
                 .retrieve()
@@ -89,10 +93,9 @@ public class GeminiService {
 
         List candidates = (List) response.get("candidates");
         Map candidate = (Map) candidates.get(0);
-        Map content = (Map) candidate.get("content");
-        List parts = (List) content.get("parts");
-        Map part = (Map) parts.get(0);
-
-        return (String) part.get("text");
+        Map content2 = (Map) candidate.get("content");
+        List responseParts = (List) content2.get("parts");
+        Map part2 = (Map) responseParts.get(0);
+        return (String) part2.get("text");
     }
 }
