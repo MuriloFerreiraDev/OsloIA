@@ -84,14 +84,6 @@ public class GeminiService {
         Map<String, Object> body = new HashMap<>();
         body.put("contents", contents);
 
-        Map response = webClient.post()
-                .uri("/v1beta/models/gemini-2.5-flash:generateContent")
-                .header("x-goog-api-key", apiKey)
-                .header("Content-Type", "application/json")
-                .bodyValue(body)
-                .retrieve()
-                .bodyToMono(Map.class)
-                .block();
 
         Map response = webClient.post()
                 .uri("/v1beta/models/gemini-2.5-flash:generateContent")
