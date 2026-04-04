@@ -70,6 +70,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
+    // 429 - Rate limit Gemini
+    @ExceptionHandler(GeminiException.class)
+    public ResponseEntity<Map<String, Object>> handleGeminiError(GeminiException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", ex.getStatusCode());
+        response.put("error", ex.getStatusCode() == 429 ? "Too Many Requests" : "AI Service Error");
+        response.put("message", ex.getMessage());
+        response.put("timestamp", LocalDateTime.now());
+
+        return ResponseEntity.status(ex.getStatusCode()).body(response);
+    }
     // 500 - Erro interno
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericError(Exception ex) {

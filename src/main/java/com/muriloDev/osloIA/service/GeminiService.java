@@ -5,6 +5,7 @@ import com.muriloDev.osloIA.domain.model.User;
 import com.muriloDev.osloIA.dto.request.ChatRequest;
 import com.muriloDev.osloIA.dto.response.ChatHistoryResponse;
 import com.muriloDev.osloIA.dto.response.ChatResponse;
+import com.muriloDev.osloIA.exception.GeminiException;
 import com.muriloDev.osloIA.repository.ChatHistoryRepository;
 import com.muriloDev.osloIA.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,6 +93,18 @@ public class GeminiService {
                 .bodyToMono(Map.class)
                 .block();
 
+        Map response = webClient.post()
+                .uri("/v1beta/models/gemini-2.5-flash:generateContent")
+                .header("x-goog-api-key", apiKey)
+                .header("Content-Type", "application/json")
+                .bodyValue(body)
+                .retrieve()
+                .onStatus(status -> status.value() == 429,
+                        r -> Mono.error(new GeminiException("Rate limit atingido. Tente novamente em alguns minutos.", 429)))
+                .onStatus(status -> status.is5xxServerError(),
+                        r -> Mono.error(new GeminiException("Erro no serviço do Gemini.", 503)))
+                .bodyToMono(Map.class)
+                .block();
         List candidates = (List) response.get("candidates");
         Map candidate = (Map) candidates.get(0);
         Map content2 = (Map) candidate.get("content");
