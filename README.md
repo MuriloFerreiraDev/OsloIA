@@ -154,6 +154,17 @@ oslo-ia/
 | POST | `/auth/login` | Login e retorno do JWT | ❌ |
 
 
+
+
+### IA
+
+| Método | Endpoint | Descrição | Auth |
+|---|---|---|---|
+| POST | `/ai/chat` | Envia mensagem para o Gemini | ✅ JWT |
+| GET | `/ai/history` | Histórico de conversas do usuário | ✅ JWT |
+
+---
+
 ## ⚠️ Códigos de Resposta HTTP
 
 | Código | Descrição |
@@ -178,15 +189,6 @@ oslo-ia/
   "timestamp": "2026-04-04T10:30:00"
 }
 ```
-
-### IA
-
-| Método | Endpoint | Descrição | Auth |
-|---|---|---|---|
-| POST | `/ai/chat` | Envia mensagem para o Gemini | ✅ JWT |
-| GET | `/ai/history` | Histórico de conversas do usuário | ✅ JWT |
-
----
 
 ## 📖 Como Usar
 
