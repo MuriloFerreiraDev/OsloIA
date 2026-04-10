@@ -14,6 +14,7 @@ resource "aws_ecr_repository" "app" {
 output "ecr_repository_url" {
   value = aws_ecr_repository.app.repository_url
 }
+
 # VPC padrão
 data "aws_vpc" "default" {
   default = true
@@ -55,23 +56,24 @@ resource "aws_db_subnet_group" "rds" {
 
 # RDS PostgreSQL
 resource "aws_db_instance" "postgres" {
-  identifier           = "oslo-ia-db"
-  engine               = "postgres"
-  engine_version       = "15"
-  instance_class       = "db.t3.micro"
-  allocated_storage    = 20
-  db_name              = "oslo_ia"
-  username             = "postgres"
-  password             = "postgres123"
-  publicly_accessible  = true
-  skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.rds.name
+  identifier             = "oslo-ia-db"
+  engine                 = "postgres"
+  engine_version         = "15"
+  instance_class         = "db.t3.micro"
+  allocated_storage      = 20
+  db_name                = "oslo_ia"
+  username               = "postgres"
+  password               = "postgres123"
+  publicly_accessible    = true
+  skip_final_snapshot    = true
+  db_subnet_group_name   = aws_db_subnet_group.rds.name
   vpc_security_group_ids = [aws_security_group.rds.id]
 }
 
 output "rds_endpoint" {
   value = aws_db_instance.postgres.endpoint
 }
+
 # IAM Role para o EKS
 resource "aws_iam_role" "eks" {
   name = "oslo-ia-eks-role"
@@ -160,4 +162,4 @@ resource "aws_eks_node_group" "workers" {
 
 output "eks_cluster_name" {
   value = aws_eks_cluster.cluster.name
-}aws eks update-kubeconfig --name oslo-ia-cluster --region sa-east-1
+}
